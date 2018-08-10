@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Chapter;
 use App\Order;
 use App\Video;
 use Illuminate\Support\Facades\DB;
@@ -40,11 +41,11 @@ class ApiController extends Controller
         $validator = Validator::make(
             rq(),
             [
-                'video_id' => 'required|exists:videos,id'
+                'chapter_id' => 'required|exists:chapters,id'
             ],
             [
-                'video_id.required' => '视频ID不存在',
-                'video_id.exists' => '视频ID查找不到'
+                'chapter_id.required' => '章节ID不存在',
+                'chapter_id.exists' => '章节ID查找不到'
             ]
         );
         if ($validator->fails())
@@ -52,20 +53,20 @@ class ApiController extends Controller
 
         $id = DB::table('orders')->insertGetId(
             [
-                'video_id' => rq('video_id'),
+                'chapter_id' => rq('chapter_id'),
                 'pay_status' => ORDER_STATUS_NOT_PAT,
                 'created_at' => date('Y-m-d H:i:s', time()),
                 'updated_at' => date('Y-m-d H:i:s', time()),
             ]
         );
 
-        $video = Video::find(rq('video_id'));
+        $chapter = Chapter::find(rq('chapter_id'));
 
         $key = FAST_PAY_APP_KEY;
         $data = [];
         $data['uid'] = FAST_PAY_USER_ID;//付款用户的id
-        $data['total_fee'] = $video->price;//支付金额,最低2元
-        $data['pay_title'] = $video->title;
+        $data['total_fee'] = $chapter->price;//支付金额,最低2元
+        $data['pay_title'] = $chapter->title;
         $data['order_no'] = $id;//填写你的订单号,不能重复
         $data['canshu1'] = 11;//可以自定义参数,
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);

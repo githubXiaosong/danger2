@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Chapter;
 use App\Http\Controllers\Controller;
 use App\Video;
 
@@ -56,7 +57,30 @@ class PageController extends Controller
         return view('admin.video-add')->with(compact('categories'));
     }
 
+    /**
+     * 章节列表页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function chapterList($video_id)
+    {
+        $video = Video::find($video_id);
 
+        $chapterList = Chapter::where(['video_id' => $video_id])->orderBy('index_num')->get();
+
+        $video->chapterList = $chapterList;
+
+        return view('admin.chapter-list')->with(compact('video'));
+    }
+
+    /**
+     * 章节添加页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function chapterAdd($video_id)
+    {
+        $video = Video::find($video_id);
+        return view('admin.chapter-add')->with(compact('video'));
+    }
 
 
 }

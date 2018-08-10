@@ -33,6 +33,12 @@
         @endif
     </script>
 
+
+    <strong>{{ $video->title }} </strong>添加章节
+    <br>
+    <br>
+    <br>
+    <br>
     <form class="layui-form" action="{{ url('admin/api/videoAdd') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
 
@@ -52,18 +58,23 @@
             @endif
         </div>
 
+
+
+
         <div class="layui-form-item">
-            <label for="L_category_id" class="layui-form-label">
-                <span class="x-red">*</span>分类
+            <label for="L_phone" class="layui-form-label">
+                <span class="x-red">*</span>视频地址
             </label>
 
-            <div class="layui-input-inline">
-                <select name="category_id" id="L_sex" lay-verify="category_id" class="layui-input">
-                    @foreach( $categories as $category )
-                        <option value="{{ $category->id }}">{{ $category->title }}</option>
-                    @endforeach
-                </select>
+            <div class="layui-input-inline  {{ $errors->has('video_uri') ? 'error-input' : '' }}">
+                <input type="text" name="video_uri" required="" id="video_uri"
+                       autocomplete="off" class="layui-input" value="{{ old('video_uri') }}" autofocus>
             </div>
+            @if ($errors->has('video_uri'))
+                <span class="help-block error-text">
+                    <strong>{{ $errors->first('video_uri') }}</strong>
+                </span>
+            @endif
         </div>
 
 

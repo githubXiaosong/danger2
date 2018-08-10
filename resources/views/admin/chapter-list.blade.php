@@ -26,20 +26,25 @@
 <body>
 <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">演示</a>
+
+        <a href="{{ url('admin/page/videoList') }}">视频列表</a>
         <a>
-            <cite>导航元素</cite></a>
+            <cite>章节列表</cite></a>
       </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="{{ url('admin/page/chapterAdd/'.$video->id) }}"
+       title="添加章节">
+       添加</a>
 </div>
 
 
 <div class="x-body">
 
-        <span class="x-right" style="line-height:40px">共有数据：{{ count($videos) }} 条</span>
+    <h3>{{ $video->title }}</h3>
+    <span class="x-right" style="line-height:40px">共有数据：{{ count($video->chapterList) }} 条</span>
 
     <table class="layui-table">
         <thead>
@@ -50,14 +55,13 @@
             </th>
             <th>ID</th>
             <th>标题</th>
-            <th>分类</th>
-            <th>状态</th>
+            <th>价格</th>
             <th>更新时间</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($videos as $video)
+        @foreach($video->chapterList as $chapter)
 
 
             <tr>
@@ -65,23 +69,17 @@
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i>
                             class="layui-icon">&#xe605;</i></div>
                 </td>
-                <td>{{ $video->id }}</td>
-                <td>{{ $video->title }}</td>
-                <td>{{ $video->category->title }}</td>
-                <td>{{ $video->status }}</td>
-                <td>{{ $video->updated_at }} <a style=" cursor: pointer"
-                                                onclick="submit_as_form('{{url('admin/api/videoUpdate')}}','video_id','{{ $video->id }}');">更新</a>
-                </td>
+                <td>{{ $chapter->id }}</td>
+                <td>{{ $chapter->title }}</td>
+                <td>{{ $chapter->price }}</td>
+                <td>{{ $chapter->updated_at }}</td>
 
 
                 <td class="td-manage">
-                    <a title="查看" href="{{ url('admin/page/chapterList/'.$video->id) }}">
-                        <i class="layui-icon">&#xe613;</i>
-                    </a>
 
 
                     <a title="删除" href="#" onclick="layer.confirm('确认要删除吗？',function(index){
-                            submit_as_form('{{url('admin/api/videoDelete')}}','video_id','{{ $video->id }}')
+                            submit_as_form('{{url('admin/api/chapterDelete')}}','chapter_id','{{ $chapter->id }}')
                             });">
                         <i class="layui-icon">&#xe640;</i>
                     </a>

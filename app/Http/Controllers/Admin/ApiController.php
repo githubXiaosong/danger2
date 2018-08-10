@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Chapter;
 use App\Http\Controllers\Controller;
 use App\Video;
 use Illuminate\Http\Request;
@@ -28,6 +29,8 @@ class ApiController extends Controller
         );
         if ($validator->fails())
             return back()->withErrors($validator->messages());
+
+        Chapter::where(['video_id'=>rq('video_id')])->delete();
 
         $video = Video::find(rq('video_id'));
         $video->delete();
@@ -75,9 +78,8 @@ class ApiController extends Controller
             [
                 'title' => 'required|max:255',
                 'category_id' => 'exists:categories,id',
-                'video_uri' => 'active_url',//可以为空
                 'desc' => 'required|string',
-                'price' => 'required|integer|min:0'
+//                'price' => 'required|integer|min:0'
 
             ],
             [
@@ -94,10 +96,6 @@ class ApiController extends Controller
 
         $video->category_id = rq('category_id');
 
-        $video->price  = rq('price');
-
-        $video->video_uri = rq('video_uri');
-
         $video->desc  = rq('desc');
 
 
@@ -108,5 +106,29 @@ class ApiController extends Controller
 
 
 
+
+    /**
+     * 章节删除
+     */
+    public function chapterDelete()
+    {
+        $validator = Validator::make(
+            rq(),
+            [
+                'chapter_id' => 'required|exists:chapters,id'
+            ],
+            [
+                'chapter_id.required' => '视频ID不存在',
+                'chapter_id.exists' => '视频ID查找不到'
+            ]
+        );
+        if ($validator->fails())
+            return back()->withErrors($validator->messages());
+
+        $chapter = Chapter::find(rq('chapter_id'));
+        $chapter->delete();
+
+        return back()->with('suc_msg', '删除成功');
+    }
 
 }
