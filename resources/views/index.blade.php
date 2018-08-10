@@ -82,8 +82,7 @@
                         data: data.data.data, //数据格式为json格式{"uid":152,"total_fee":2,"pay_title":"付款demo","order_no":"15296307831"}
                         sign: data.data.sign,//签名md5(你的秘钥|data)
                         success: function (data) {
-                            console.log(data);
-                            alert("支付成功");
+                            alert("支付成功 单击确定开始下载");
                         }
                     });
                 }

@@ -100,5 +100,5 @@ class ApiController extends Controller
             Log::info('PAY CALLBACK ERROR!!');
         }
     }
-    
+
 }

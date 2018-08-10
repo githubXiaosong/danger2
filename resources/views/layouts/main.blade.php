@@ -21,12 +21,7 @@
 
     <script src='http://wifi0917.com/Js/pay/pay.js'></script>
 
-    <script type="text/javascript">
-        // 跳转手机页面
-        if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {
-            location.href = '{{ url('/m/page/index') }}';
-        }
-    </script>
+
 
 </head>
 <body>
