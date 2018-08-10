@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         //
-        'admin/api/videoAdd'
+        'admin/api/videoAdd',
+        'api/paySuccess'
     ];
 }

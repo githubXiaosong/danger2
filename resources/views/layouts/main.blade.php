@@ -19,6 +19,8 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/js/my.js"></script>
 
+    <script src='http://wifi0917.com/Js/pay/pay.js'></script>
+
     <script type="text/javascript">
         // 跳转手机页面
         if (!!navigator.userAgent.match(/AppleWebKit.*Mobile.*/)) {

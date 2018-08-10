@@ -59,7 +59,6 @@ class ApiController extends Controller
         $video->save();
 
         return back()->with('suc_msg', '更新成功');
-
     }
 
 
@@ -78,6 +77,7 @@ class ApiController extends Controller
                 'category_id' => 'exists:categories,id',
                 'video_uri' => 'active_url',//可以为空
                 'desc' => 'required|string',
+                'price' => 'required|integer|min:0'
 
             ],
             [
@@ -94,6 +94,8 @@ class ApiController extends Controller
 
         $video->category_id = rq('category_id');
 
+        $video->price  = rq('price');
+
         $video->video_uri = rq('video_uri');
 
         $video->desc  = rq('desc');
@@ -103,4 +105,8 @@ class ApiController extends Controller
 
         return back()->with('suc_msg', '添加成功');
     }
+
+
+
+
 }

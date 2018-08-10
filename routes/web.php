@@ -48,6 +48,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::group(['prefix' => 'api'], function () {
         Route::get('getCategoryList', 'ApiController@getCategoryList');
         Route::get('getTopList', 'ApiController@getTopList');
+        Route::get('getTopList', 'ApiController@getTopList');
+        Route::post('orderCreate', 'ApiController@orderCreate');
+        Route::post('paySuccess', 'ApiController@paySuccess');
     });
 
     Route::group(['prefix' => 'm'], function () {

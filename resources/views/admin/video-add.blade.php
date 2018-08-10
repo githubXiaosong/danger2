@@ -66,6 +66,23 @@
             </div>
         </div>
 
+        <div class="layui-form-item">
+            <label for="L_price" class="layui-form-label">
+                <span class="x-red">*</span>价格
+            </label>
+
+            <div class="layui-input-inline  {{ $errors->has('price') ? 'error-input' : '' }}">
+                <input type="number" id="L_title" name="price" required=""
+                       autocomplete="off" class="layui-input" value="{{ old('price') }}" autofocus>
+            </div>
+            @if ($errors->has('price'))
+                <span class="help-block error-text">
+                    <strong>{{ $errors->first('price') }}</strong>
+                </span>
+            @endif
+        </div>
+
+
 
         <div class="layui-form-item">
             <label for="L_phone" class="layui-form-label">

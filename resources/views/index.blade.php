@@ -53,7 +53,7 @@
                         <td>{{ $video->pop_num }}</td>
                         <td>{{ $video->price }}元</td>
                         <td>
-                            <button class="btn btn-block btn-sm"> 下载</button>
+                            <button class="btn btn-block btn-sm" onclick="orderCreate({{ $video->id }})"> 下载</button>
                         </td>
                     </tr>
 
@@ -66,5 +66,29 @@
         @endforeach
 
     </div>
+
+    <script>
+        function orderCreate(video_id) {
+            $.post(
+                '{{ url('api/orderCreate') }}',
+                {
+                    video_id: video_id,
+                    _token: '{{csrf_token()}}'
+                },
+                function (data, status) {
+                    console.log(data);
+                    fast_pay.shows_qr({
+                        appkey: data.data.key,//填写网站生成的appkey
+                        data: data.data.data, //数据格式为json格式{"uid":152,"total_fee":2,"pay_title":"付款demo","order_no":"15296307831"}
+                        sign: data.data.sign,//签名md5(你的秘钥|data)
+                        success: function (data) {
+                            console.log(data);
+                            alert("支付成功");
+                        }
+                    });
+                }
+            )
+        }
+    </script>
 
 @endsection

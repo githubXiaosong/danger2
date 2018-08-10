@@ -27,7 +27,6 @@ class PageController extends Controller
         // 获取最新的10条和点赞最好的15条记录挂到 $categories
         $categories = Category::where(['status' => STATUS_ON_LINE])->with('videos')->get();
 
-
         return view('index')->with(compact('categories'));
     }
 
