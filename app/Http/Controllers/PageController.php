@@ -24,9 +24,12 @@ class PageController extends Controller
      */
     public function index()
     {
+        $categories = Category::get();
 
-        // 获取最新的10条和点赞最好的15条记录挂到 $categories
-        $categories = Category::where(['status' => STATUS_ON_LINE])->with('videos')->get();
+        foreach ($categories as $category){
+            $videoList = Video::where(['category_id'=>$category->id])->orderBy('updated_at','desc')->get();
+            $category->videoList = $videoList;
+        }
 
         return view('index')->with(compact('categories'));
     }
@@ -40,7 +43,7 @@ class PageController extends Controller
 
         $video = Video::find($video_id);
 
-        $chapters = Chapter::where(['video_id'=>$video_id])->orderBy('index_num')->get();
+        $chapters = Chapter::where(['video_id'=>$video_id])->orderBy('updated_at','desc')->get();
 
         $video['chapters'] = $chapters;
 

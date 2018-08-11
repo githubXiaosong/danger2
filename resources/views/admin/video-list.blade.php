@@ -39,7 +39,7 @@
 
 <div class="x-body">
 
-        <span class="x-right" style="line-height:40px">共有数据：{{ count($videos) }} 条</span>
+
 
     <table class="layui-table">
         <thead>
@@ -57,37 +57,42 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($videos as $video)
+        @foreach($categories as $category)
+
+            <tr> <th>{{ $category->title }} </th></tr>
+
+            @foreach($category->videoList as $video)
+                <tr>
+                    <td>
+                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i>
+                                class="layui-icon">&#xe605;</i></div>
+                    </td>
+                    <td>{{ $video->id }}</td>
+                    <td>{{ $video->title }}</td>
+                    <td>{{ $video->category->title }}</td>
+                    <td>{{ $video->status }}</td>
+                    <td>{{ $video->updated_at }}
+                    </td>
 
 
-            <tr>
-                <td>
-                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i>
-                            class="layui-icon">&#xe605;</i></div>
-                </td>
-                <td>{{ $video->id }}</td>
-                <td>{{ $video->title }}</td>
-                <td>{{ $video->category->title }}</td>
-                <td>{{ $video->status }}</td>
-                <td>{{ $video->updated_at }} <a style=" cursor: pointer"
-                                                onclick="submit_as_form('{{url('admin/api/videoUpdate')}}','video_id','{{ $video->id }}');">更新</a>
-                </td>
+                    <td class="td-manage">
+                        <a title="查看" href="{{ url('admin/page/chapterList/'.$video->id) }}">
+                            查看
+                        </a>
 
 
-                <td class="td-manage">
-                    <a title="查看" href="{{ url('admin/page/chapterList/'.$video->id) }}">
-                        <i class="layui-icon">&#xe613;</i>
-                    </a>
+                        <a title="删除" href="#" onclick="layer.confirm('确认要删除吗？',function(index){
+                                submit_as_form('{{url('admin/api/videoDelete')}}','video_id','{{ $video->id }}')
+                                });">
+                            删除
+                        </a>
 
+                        <a style=" cursor: pointer"
+                           onclick="submit_as_form('{{url('admin/api/videoTop')}}','video_id','{{ $video->id }}');">置顶</a>
 
-                    <a title="删除" href="#" onclick="layer.confirm('确认要删除吗？',function(index){
-                            submit_as_form('{{url('admin/api/videoDelete')}}','video_id','{{ $video->id }}')
-                            });">
-                        <i class="layui-icon">&#xe640;</i>
-                    </a>
-                </td>
-            </tr>
-
+                    </td>
+                </tr>
+            @endforeach
         @endforeach
         </tbody>
 

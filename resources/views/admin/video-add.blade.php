@@ -86,6 +86,24 @@
         </div>
 
 
+        <div class="layui-form-item">
+            <label for="cover_uri" class="layui-form-label">
+                <span class="x-red">*</span>图片
+            </label>
+
+            <div class="layui-input-inline  {{ $errors->has('cover_uri') ? 'error-input' : '' }}">
+                <input type="file"
+                        name="cover_uri" required="" id="desc"
+                        class="layui-input" value="{{ old('cover_uri') }}" autofocus>
+
+            </div>
+            @if ($errors->has('cover_uri'))
+                <span class="help-block error-text">
+                    <strong>{{ $errors->first('cover_uri') }}</strong>
+                </span>
+            @endif
+        </div>
+
 
         <div class="layui-form-item">
             <label for="L_repass" class="layui-form-label">

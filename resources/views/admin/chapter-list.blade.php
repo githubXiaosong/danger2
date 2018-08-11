@@ -81,8 +81,12 @@
                     <a title="删除" href="#" onclick="layer.confirm('确认要删除吗？',function(index){
                             submit_as_form('{{url('admin/api/chapterDelete')}}','chapter_id','{{ $chapter->id }}')
                             });">
-                        <i class="layui-icon">&#xe640;</i>
+                       删除
                     </a>
+
+                    <a style=" cursor: pointer"
+                       onclick="submit_as_form('{{url('admin/api/chapterTop')}}','chapter_id','{{ $chapter->id }}');">置顶</a>
+
                 </td>
             </tr>
 

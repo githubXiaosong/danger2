@@ -20,7 +20,6 @@
     <script src='http://wifi0917.com/Js/pay/pay.js'></script>
 
 
-
 </head>
 <body>
 
@@ -31,8 +30,9 @@
 @show
 
 
-@yield('content')
-
+<div style="min-height: 800px; padding-left: 200px;padding-right: 200px ">
+    @yield('content')
+</div>
 
 @section('footer')
 

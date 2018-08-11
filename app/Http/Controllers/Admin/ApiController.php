@@ -41,7 +41,7 @@ class ApiController extends Controller
     /**
      * 更新视频刷新时间
      */
-    public function videoUpdate(){
+    public function videoTop(){
 
         $validator = Validator::make(
             rq(),
@@ -73,6 +73,7 @@ class ApiController extends Controller
     public function videoAdd(Request $request)
     {
 
+
         $validator = Validator::make(
             rq(),
             [
@@ -80,6 +81,7 @@ class ApiController extends Controller
                 'category_id' => 'exists:categories,id',
                 'desc' => 'required|string',
 //                'price' => 'required|integer|min:0'
+                'cover_uri' => 'required|image',
 
             ],
             [
@@ -98,6 +100,9 @@ class ApiController extends Controller
 
         $video->desc  = rq('desc');
 
+        $cover_path = $request->cover_uri->store('img', 'public');
+
+        $video->cover_uri = $cover_path;
 
         $video->save();
 
@@ -129,6 +134,71 @@ class ApiController extends Controller
         $chapter->delete();
 
         return back()->with('suc_msg', '删除成功');
+    }
+
+
+    /**
+     * 添加章节
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function chapterAdd()
+    {
+
+        $validator = Validator::make(
+            rq(),
+            [
+                'title' => 'required|max:255',
+                'video_id' => 'exists:videos,id',
+                'price' => 'required|integer|min:0',
+                'uri' => 'required|active_url'
+            ],
+            [
+
+            ]
+        );
+        if ($validator->fails())
+            return back()->withErrors($validator->messages());
+
+
+
+        $chapter = new Chapter();
+
+        $chapter->title = rq('title');
+        $chapter->video_id = rq('video_id');
+        $chapter->price = rq('price');
+        $chapter->uri = rq('uri');
+
+
+        $chapter->save();
+
+        return back()->with('suc_msg', '添加成功');
+    }
+
+    /**
+     * 更新章节刷新时间
+     */
+    public function chapterTop(){
+
+        $validator = Validator::make(
+            rq(),
+            [
+                'chapter_id' => 'required|exists:chapters,id'
+            ],
+            [
+                'chapter_id.required' => '视频ID不存在',
+                'chapter_id.exists' => '视频ID查找不到'
+            ]
+        );
+        if ($validator->fails())
+            return back()->withErrors($validator->messages());
+
+        $chapter = Chapter::find(rq('chapter_id'));
+
+        $chapter->updated_at = time();
+        $chapter->save();
+
+        return back()->with('suc_msg', '更新成功');
     }
 
 }

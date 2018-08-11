@@ -43,8 +43,15 @@ class PageController extends Controller
      */
     public function videoList()
     {
-        $videos = Video::with(['category'])->orderBy('category_id')->get();
-        return view('admin.video-list')->with(compact('videos'));
+
+        $categories = Category::get();
+
+        foreach ($categories as $category){
+            $videoList = Video::where(['category_id'=>$category->id])->orderBy('updated_at','desc')->get();
+            $category->videoList = $videoList;
+        }
+
+        return view('admin.video-list')->with(compact('categories'));
     }
 
     /**
@@ -65,7 +72,7 @@ class PageController extends Controller
     {
         $video = Video::find($video_id);
 
-        $chapterList = Chapter::where(['video_id' => $video_id])->orderBy('index_num')->get();
+        $chapterList = Chapter::where(['video_id' => $video_id])->orderBy('updated_at','desc')->get();
 
         $video->chapterList = $chapterList;
 

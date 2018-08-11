@@ -6,38 +6,41 @@
 
 
 
-    <div class="container" style="min-height: 800px; ">
-        @foreach($categories as $category)
+    @foreach($categories as $category)
 
 
-            <a name="{{ $category->title }}"></a>
-            <legend><strong>{{$category->title}} </strong></legend>
-            <table class="table table-condensed table-striped">
-                <tr>
-                    <th>标题</th>
-                    <th>下载量</th>
-                    <th></th>
 
-                </tr>
 
-                @foreach($category->videos as $video)
-                    <tr>
-                        <td>{{ $video->title }}</td>
-                        <td>{{ $video->pop_num }}</td>
-                        <td>
-                            <a href="{{ url('/page/chapterList/'.$video->id) }}"><button class="btn btn-block btn-sm"> 查看</button></a>
-                        </td>
-                    </tr>
+        <a name="{{ $category->title }}"></a>
+        <legend><strong>{{$category->title}} </strong></legend>
 
-                @endforeach
+        <div class="row">
+            @foreach($category->videoList as $video)
 
-            </table>
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="{{ '/storage/'.$video->cover_uri }}" alt="...">
+                        <div class="caption">
+                            <h3>{{ $video->title }}</h3>
+                            <p>下载量: {{ $video->pop_num }} </p>
+                            <p><a href="{{ url('/page/chapterList/'.$video->id) }}" class="btn btn-primary"
+                                  role="button">下载</a> <a href="#"
+                                                          class="btn btn-default"
+                                                          role="button">Button</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-            <br>
 
-        @endforeach
+            @endforeach
 
-    </div>
+        </div>
+        <br>
+
+    @endforeach
+
+
 
 
 @endsection

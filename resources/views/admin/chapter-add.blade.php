@@ -39,8 +39,10 @@
     <br>
     <br>
     <br>
-    <form class="layui-form" action="{{ url('admin/api/videoAdd') }}" method="post" enctype="multipart/form-data">
+    <form class="layui-form" action="{{ url('admin/api/chapterAdd') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
+
+        <input type="hidden" name="video_id" value="{{ $video->id }}">
 
         <div class="layui-form-item">
             <label for="L_title" class="layui-form-label">
@@ -66,32 +68,30 @@
                 <span class="x-red">*</span>视频地址
             </label>
 
-            <div class="layui-input-inline  {{ $errors->has('video_uri') ? 'error-input' : '' }}">
-                <input type="text" name="video_uri" required="" id="video_uri"
-                       autocomplete="off" class="layui-input" value="{{ old('video_uri') }}" autofocus>
+            <div class="layui-input-inline  {{ $errors->has('uri') ? 'error-input' : '' }}">
+                <input type="text" name="uri" required="" id="uri"
+                       autocomplete="off" class="layui-input" value="{{ old('uri') }}" autofocus>
             </div>
-            @if ($errors->has('video_uri'))
+            @if ($errors->has('uri'))
                 <span class="help-block error-text">
-                    <strong>{{ $errors->first('video_uri') }}</strong>
+                    <strong>{{ $errors->first('uri') }}</strong>
                 </span>
             @endif
         </div>
 
 
         <div class="layui-form-item">
-            <label for="desc" class="layui-form-label">
-                <span class="x-red">*</span>描述
+            <label for="price" class="layui-form-label">
+                <span class="x-red">*</span>价格
             </label>
 
-            <div class="layui-input-inline  {{ $errors->has('desc') ? 'error-input' : '' }}">
-                <textarea
-                         name="desc" required="" id="desc"
-                      class="layui-input" value="{{ old('desc') }}" autofocus>
-                    </textarea>
+            <div class="layui-input-inline  {{ $errors->has('price') ? 'error-input' : '' }}">
+                <input type="number" name="price" required=""
+                       autocomplete="off" class="layui-input" value="{{ old('price') }}" autofocus>
             </div>
-            @if ($errors->has('desc'))
+            @if ($errors->has('price'))
                 <span class="help-block error-text">
-                    <strong>{{ $errors->first('desc') }}</strong>
+                    <strong>{{ $errors->first('price') }}</strong>
                 </span>
             @endif
         </div>
@@ -104,7 +104,7 @@
             <button type="submit" class="layui-btn" lay-filter="add" lay-submit="">
                 增加
             </button>
-            <a style="padding-left: 20px" href="{{ url('admin/roomList') }}">返回</a>
+            <a style="padding-left: 20px" href="{{ url('/admin/page/chapterList/'.$video->id) }}">返回</a>
         </div>
 
 
