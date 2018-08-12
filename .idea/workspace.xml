@@ -341,7 +341,7 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/recursion-context" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="width" value="1247" />
     <option name="height" value="1040" />
   </component>
@@ -545,12 +545,12 @@
       <workItem from="1533891414556" duration="960000" />
       <workItem from="1533961558057" duration="9691000" />
       <workItem from="1533998594737" duration="5148000" />
-      <workItem from="1534046284810" duration="5230000" />
+      <workItem from="1534046284810" duration="5899000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104500000" />
+    <option name="totallyTimeSpent" value="105169000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
