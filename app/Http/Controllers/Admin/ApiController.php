@@ -81,7 +81,7 @@ class ApiController extends Controller
                 'category_id' => 'exists:categories,id',
                 'desc' => 'required|string',
                 'password' => 'required|string',
-                'cover_uri' => 'required|image',
+                'cover_uri' => 'required|string',
                 'price' => 'required|integer|min:0',
                 'uri' => 'required|active_url'
 
@@ -104,9 +104,7 @@ class ApiController extends Controller
 
         $video->password  = rq('password');
 
-        $cover_path = $request->cover_uri->store('img', 'public');
-
-        $video->cover_uri = $cover_path;
+        $video->cover_uri = rq('cover_uri');
 
         $video->price = rq('price');
 

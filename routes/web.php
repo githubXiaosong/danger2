@@ -38,10 +38,7 @@ Route::group(['middleware' => 'web'], function () {
 
 
     Route::group(['prefix' => 'page'], function () {
-        Route::get('index', 'PageController@index');
-        Route::get('videoList/{category_id}', 'PageController@videoList');//未启用
-        Route::get('chapterList/{video_id}', 'PageController@chapterList');
-    });
+        Route::get('index/{category_id}', 'PageController@index');});
 
     Route::group(['prefix' => 'api'], function () {
         Route::get('getCategoryList', 'ApiController@getCategoryList');
@@ -68,20 +65,12 @@ Route::group(['middleware' => 'web'], function () {
 
             Route::get('/videoList', 'Admin\PageController@videoList');
             Route::get('/videoAdd', 'Admin\PageController@videoAdd');
-
-            Route::get('/chapterList/{video_id}', 'Admin\PageController@chapterList');
-            Route::get('/chapterAdd/{video_id}', 'Admin\PageController@chapterAdd');
         });
 
         Route::group(['prefix' => 'api'], function () {
             Route::post('/videoDelete', 'Admin\ApiController@videoDelete');
             Route::post('/videoTop', 'Admin\ApiController@videoTop');
             Route::post('/videoAdd', 'Admin\ApiController@videoAdd');
-
-            Route::post('/chapterDelete', 'Admin\ApiController@chapterDelete');
-            Route::post('/chapterAdd', 'Admin\ApiController@chapterAdd');
-            Route::post('/chapterTop', 'Admin\ApiController@chapterTop');
-
 
         });
 
