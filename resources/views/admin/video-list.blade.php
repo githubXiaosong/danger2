@@ -76,9 +76,9 @@
 
 
                     <td class="td-manage">
-                        <a title="查看" href="{{ url('admin/page/chapterList/'.$video->id) }}">
-                            查看
-                        </a>
+                        {{--<a title="查看" href="{{ url('admin/page/chapterList/'.$video->id) }}">--}}
+                            {{--查看--}}
+                        {{--</a>--}}
 
 
                         <a title="删除" href="#" onclick="layer.confirm('确认要删除吗？',function(index){

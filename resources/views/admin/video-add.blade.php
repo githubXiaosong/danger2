@@ -74,8 +74,8 @@
 
             <div class="layui-input-inline  {{ $errors->has('desc') ? 'error-input' : '' }}">
                 <textarea
-                         name="desc" required="" id="desc"
-                      class="layui-input" value="{{ old('desc') }}" autofocus>
+                        name="desc" required="" id="desc"
+                        class="layui-input" value="{{ old('desc') }}" autofocus>
                     </textarea>
             </div>
             @if ($errors->has('desc'))
@@ -85,6 +85,53 @@
             @endif
         </div>
 
+        <div class="layui-form-item">
+            <label for="L_phone" class="layui-form-label">
+                <span class="x-red">*</span>视频地址
+            </label>
+
+            <div class="layui-input-inline  {{ $errors->has('uri') ? 'error-input' : '' }}">
+                <input type="text" name="uri" required="" id="uri"
+                       autocomplete="off" class="layui-input" value="{{ old('uri') }}" autofocus>
+            </div>
+            @if ($errors->has('uri'))
+                <span class="help-block error-text">
+                    <strong>{{ $errors->first('uri') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="layui-form-item">
+            <label for="L_password" class="layui-form-label">
+                <span class="x-red">*</span>密码
+            </label>
+
+            <div class="layui-input-inline  {{ $errors->has('password') ? 'error-input' : '' }}">
+                <input type="text" name="password" required="" id="password"
+                       autocomplete="off" class="layui-input" value="{{ old('password') }}" autofocus>
+            </div>
+            @if ($errors->has('password'))
+                <span class="help-block error-text">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </span>
+            @endif
+        </div>
+
+        <div class="layui-form-item">
+            <label for="price" class="layui-form-label">
+                <span class="x-red">*</span>价格
+            </label>
+
+            <div class="layui-input-inline  {{ $errors->has('price') ? 'error-input' : '' }}">
+                <input type="number" name="price" required=""
+                       autocomplete="off" class="layui-input" value="{{ old('price') }}" autofocus>
+            </div>
+            @if ($errors->has('price'))
+                <span class="help-block error-text">
+                    <strong>{{ $errors->first('price') }}</strong>
+                </span>
+            @endif
+        </div>
 
         <div class="layui-form-item">
             <label for="cover_uri" class="layui-form-label">
@@ -93,8 +140,8 @@
 
             <div class="layui-input-inline  {{ $errors->has('cover_uri') ? 'error-input' : '' }}">
                 <input type="file"
-                        name="cover_uri" required="" id="desc"
-                        class="layui-input" value="{{ old('cover_uri') }}" autofocus>
+                       name="cover_uri" required="" id="desc"
+                       class="layui-input" value="{{ old('cover_uri') }}" autofocus>
 
             </div>
             @if ($errors->has('cover_uri'))

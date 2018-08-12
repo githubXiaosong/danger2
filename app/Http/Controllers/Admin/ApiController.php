@@ -80,8 +80,10 @@ class ApiController extends Controller
                 'title' => 'required|max:255',
                 'category_id' => 'exists:categories,id',
                 'desc' => 'required|string',
-//                'price' => 'required|integer|min:0'
+                'password' => 'required|string',
                 'cover_uri' => 'required|image',
+                'price' => 'required|integer|min:0',
+                'uri' => 'required|active_url'
 
             ],
             [
@@ -100,9 +102,15 @@ class ApiController extends Controller
 
         $video->desc  = rq('desc');
 
+        $video->password  = rq('password');
+
         $cover_path = $request->cover_uri->store('img', 'public');
 
         $video->cover_uri = $cover_path;
+
+        $video->price = rq('price');
+
+        $video->uri = rq('uri');
 
         $video->save();
 

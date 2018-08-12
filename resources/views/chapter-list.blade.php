@@ -50,7 +50,6 @@
                     _token: '{{csrf_token()}}'
                 },
                 function (data, status) {
-                    console.log(data);
                     fast_pay.shows_qr({
                         appkey: data.data.key,
                         data: data.data.data,
