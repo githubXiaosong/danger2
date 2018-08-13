@@ -30,7 +30,7 @@
 @show
 
 
-<div style="min-height: 800px; padding-left: 200px;padding-right: 200px ; margin-top: 100px" >
+<div style="min-height: 800px;  margin-top: 100px"  class="container">
     @yield('content')
 </div>
 

@@ -17,6 +17,8 @@
                     <li class="{{ \Illuminate\Support\Facades\Request::is( 'page/index/'.$item['id'] ) ? 'active' : '' }} "><a href="{{ url('page/index/'.$item['id'])  }}" >{{ $item['title'] }}</a></li>
                 @endforeach
 
+
+                <li class="{{ \Illuminate\Support\Facades\Request::is( 'page/statement' ) ? 'active' : '' }}"><a href="{{ url('page/statement') }}" class=" ">网站必读</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
 

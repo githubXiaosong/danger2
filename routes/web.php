@@ -38,7 +38,10 @@ Route::group(['middleware' => 'web'], function () {
 
 
     Route::group(['prefix' => 'page'], function () {
-        Route::get('index/{category_id}', 'PageController@index');});
+        Route::get('index/{category_id}', 'PageController@index');
+        Route::get('statement', 'PageController@statement');
+    });
+
 
     Route::group(['prefix' => 'api'], function () {
         Route::get('getCategoryList', 'ApiController@getCategoryList');
@@ -48,15 +51,6 @@ Route::group(['middleware' => 'web'], function () {
         Route::post('paySuccess', 'ApiController@paySuccess');
     });
 
-    Route::group(['prefix' => 'm'], function () {
-        Route::group(['prefix' => 'page'], function () {
-            Route::get('index', 'M\PageController@index');
-        });
-
-        Route::group(['prefix' => 'api'], function () {
-
-        });
-    });
 
     Route::group(['prefix' => 'admin'], function () {
 
